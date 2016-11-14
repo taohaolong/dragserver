@@ -23,12 +23,9 @@ int main(int argc, char *argv[]) {
     printf("Dragon AVideo Server start.\n ");
 
     try {
-        int m=0;
+        int m = 0;
         Dawnevent server;
-     //   server.Init();
         server.Start();
-        // init AVS
-        // start AVS
     }
     catch (const std::exception &e) {
 
