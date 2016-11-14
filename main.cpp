@@ -8,11 +8,12 @@
  * Description: Dragon Audio&Video Transport Server [Main]
  */
 
+
 #include <iostream>
 #include <stdio.h>
 
 #include "server/dragserver.h"
-
+#include "server/dragserverEvent.h"
 
 using namespace std;
 
@@ -24,8 +25,12 @@ int main(int argc, char *argv[]) {
 
     try {
 
-        DragServer server;
-        server.Start();
+//        DragServer server;
+//        server.Start();
+
+        setvbuf(stdout, NULL, _IONBF, 0);
+
+        run();
     }
     catch (const std::exception &e) {
 
