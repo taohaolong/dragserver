@@ -2,10 +2,12 @@
 // Created by tao Jacky on 11/13/16.
 //
 
-#include "event.h"
+#include "dragserver.h"
 
-#include <event2/event.h>
-#include <event2/bufferevent.h>
+
+/*
+ *  回调函数定义
+ */
 void read_cb(struct bufferevent *bev, void *arg)
 {
     char line[MAX_LINE+1];
@@ -21,6 +23,7 @@ void read_cb(struct bufferevent *bev, void *arg)
 }
 
 void write_cb(struct bufferevent *bev, void *arg) {}
+
 void error_cb(struct bufferevent *bev, short event, void *arg)
 {
     evutil_socket_t fd = bufferevent_getfd(bev);
@@ -36,13 +39,19 @@ void error_cb(struct bufferevent *bev, short event, void *arg)
     }
     bufferevent_free(bev);
 }
+
 void do_accept_cb(evutil_socket_t listener, short event, void *arg)
 {
     struct event_base *base = (struct event_base *)arg;
+
     evutil_socket_t fd;
+
     struct sockaddr_in sin;
+
     socklen_t slen;
+
     fd = accept(listener, (struct sockaddr *)&sin, &slen);
+
     if (fd < 0) {
         perror("accept");
         return;
@@ -51,24 +60,26 @@ void do_accept_cb(evutil_socket_t listener, short event, void *arg)
     printf("accept: fd = %u\n", fd);
 
     //使用bufferevent_socket_new创建一个struct bufferevent *bev，关联该sockfd，托管给event_base
-    struct bufferevent *bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);//BEV_OPT_CLOSE_ON_FREE表示释放buff
-//erevent时关闭底层传输端口。这将关闭底层套接字，释放底层bufferevent等。
+    struct bufferevent *bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
 
+    //BEV_OPT_CLOSE_ON_FREE表示释放bufferevent时关闭底层传输端口。这将关闭底层套接字，释放层bufferevent等。
     bufferevent_setcb(bev, read_cb, NULL, error_cb, arg);
     bufferevent_enable(bev, EV_READ|EV_WRITE|EV_PERSIST);//启用read/write事件
 }
 
 
-int Dawnevent::Init() {
+int DragServer::Init() {
 
     return 0;
 
 }
 
-int Dawnevent::Start() {
+int DragServer::Start() {
 
     evutil_socket_t listener;
+
     listener = socket(AF_INET, SOCK_STREAM, 0);
+
     if(listener < 0)
     {
         printf("socket error!\n");
@@ -105,12 +116,14 @@ int Dawnevent::Start() {
         fprintf(stderr, "Could not initialize libevent!\n");
         return 1;
     }
-//    printf ("base\n");
 
     //创建并绑定一个event
     struct event *listen_event;
+
     listen_event = event_new(base, listener, EV_READ|EV_PERSIST,do_accept_cb, (void*)base);
+
     event_add(listen_event, NULL);//注册时间，参数NULL表示无超时设置
+
     event_base_dispatch(base);//）程序进入无限循环，等待就绪事件并执行事件处理
 
     printf("The End.");

@@ -16,7 +16,7 @@
 #define LISTEN_BACKLOG 32
 #define MAX_LINE    256
 
-class Dawnevent {
+class DragServer {
 public:
     int Init();
     int Start();

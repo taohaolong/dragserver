@@ -11,7 +11,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "server/event.h"
+#include "server/dragserver.h"
 
 
 using namespace std;
@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
     printf("Dragon AVideo Server start.\n ");
 
     try {
-        int m = 0;
-        Dawnevent server;
+
+        DragServer server;
         server.Start();
     }
     catch (const std::exception &e) {

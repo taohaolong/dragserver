@@ -1,3 +1,3 @@
 
 
- g++  main.cpp server/event.cpp server/event.h -o bin/svr -levent -g
+ g++  main.cpp server/dragserver.cpp server/dragserver.h -o bin/svr -levent -g
