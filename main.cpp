@@ -11,14 +11,28 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "server/event.h"
+
 
 using namespace std;
 
 
+int main(int argc, char *argv[]) {
 
-int main(int argc, char* argv[]) {
-
+    // server start
     printf("Dragon AVideo Server start.\n ");
+
+    try {
+        int m=0;
+        Dawnevent server;
+     //   server.Init();
+        server.Start();
+        // init AVS
+        // start AVS
+    }
+    catch (const std::exception &e) {
+
+    }
 
 
     return 0;
