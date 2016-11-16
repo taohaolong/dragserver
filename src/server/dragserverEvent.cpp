@@ -2,10 +2,10 @@
 // Created by taohao on 2016/11/14.
 //
 #include "dragserverEvent.h"
-
+#include "network/sockutil.h"
 
 using namespace std;
-
+using namespace NetDrag;
 void do_read(evutil_socket_t fd, short events, void *arg);
 
 //struct bufferevent内建了两个event(read/write)和对应的缓冲区(struct evbuffer *input, *output)，并提供相应的函数用来操作>
@@ -113,7 +113,7 @@ void run(void) {
     sin.sin_addr.s_addr = 0;
     sin.sin_port = htons(8760);
     // TCP Setting:[SOCK_STREAM]
-    listener = socket(AF_INET, SOCK_STREAM, 0);
+    listener = Socket::create_tcp();//socket(AF_INET, SOCK_STREAM, 0);
     evutil_make_socket_nonblocking(listener);
 
 #ifndef WIN32

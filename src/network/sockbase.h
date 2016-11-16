@@ -26,6 +26,6 @@ public:
 };
 
 
-END_NAME_SPACE(NetDrag)
+END_NAME_SPACE
 
 #endif //DRAGONAVS_SOCKBASE_H
