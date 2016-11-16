@@ -1,3 +1,6 @@
+# SRC
+# by Jacky.Tao @2016.11.16
+
 LIB=-levent
 INC=-I. -I ./src/
 CFLAG=-g -Wall
