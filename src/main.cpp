@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
 
     // server start
-    printf("Dragon AVideo Server start.\n ");
+    printf("Dragon AVideo Server start.\n");
 
     try {
 

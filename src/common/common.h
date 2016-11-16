@@ -14,4 +14,25 @@
 #define DRAGON "Dragon"
 
 
+#define LINUX_DRAGON
+#ifdef  LINUX_DRAGON
+
+
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#include <string>
+#include <assert.h>
+#include <sstream>
+
+
+#endif //LINUX_DRAGON
+
+
+
+
+
+
+
+
 #endif //DRAGONAVS_COMMON_H
