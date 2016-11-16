@@ -1,23 +1,24 @@
 LIB=-levent
-INC=-I.
+INC=-I. -I ./src/
 CFLAG=-g -Wall
 CXX=g++
-CUR_PATH = ./obj/
+SRC_PATH = ./src/
 
-#$(foreach dir,$(CUR_PATH),$(wildcard $(dir)*.cpp))
+#$(foreach dir,$(SRC_PATH),$(wildcard $(dir)*.cpp))
 
-SOURCE=$(wildcard *.cpp ./server/*.cpp ./log/*.cpp)
+SOURCE=$(wildcard $(SRC_PATH)*.cpp $(SRC_PATH)server/*.cpp $(SRC_PATH)log/*.cpp )
 
 OBJS=$(patsubst %.cpp,%.o,$(SOURCE))
 
-OBJ=$(filter-out main.o,$(OBJS))
+OBJ=$(filter-out $(SRC_PATH)main.o,$(OBJS))
 
 .cpp.o:$(SOURCE)
-	$(CXX) $(CFLAG) -c $< -o $@
+	$(CXX) $(INC)  $(CFLAG) -c $< -o $@
 
 build:$(OBJ)
-	$(CXX) $(CFLAG) $(OBJ) main.cpp -o bin/dragServer $(LIB)
+	$(CXX) $(SRC_PATH)main.cpp $(INC) $(CFLAG) $(OBJ)  -o bin/dragServer $(LIB)
 clean:
-	rm -rf log/*.o
-	rm -rf server/*.o
+	rm -rf $(SRC_PATH)log/*.o
+	rm -rf $(SRC_PATH)server/*.o
 	rm -f  bin/dragServer
+	rm -f  src/*.o

@@ -3,5 +3,5 @@ project(DragonAVS)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp server/dragsock.cpp server/dragsock.h common.h.h)
 add_executable(DragonAVS ${SOURCE_FILES})
