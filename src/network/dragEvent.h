@@ -11,5 +11,8 @@
 #include <event2/buffer.h>
 #include <event2/bufferevent.h>
 
+// include common header file
+#include "common/common.h"
+#include "common/type.h"
 
 #endif //DRAGONAVS_DRAGEVENT_H
