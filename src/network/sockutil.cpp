@@ -9,11 +9,16 @@
 #include "sockutil.h"
 #include "base/base_sock.h"
 
-
+#include <stdio.h>
 
 BEGIN_NAME_SPACE(NetDrag)
 
 evutil_socket_t Socket::create_tcp() {
+
+#ifndef NETPRINT
+    printf("evutil_socket_t Socket::create_tcp() \n");
+#endif
+
 
     return ::socket(AF_INET, SOCK_STREAM, 0);
 }
